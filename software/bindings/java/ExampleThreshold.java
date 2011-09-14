@@ -9,10 +9,13 @@ public class ExampleThreshold {
 	// Note: To make the example code cleaner we do not handle exceptions. Exceptions you
 	//       might normally want to catch are described in the commnents below
 	public static void main(String args[]) throws Exception {
-		IPConnection ipcon = new IPConnection(host, port); // Create connection to brickd (Can throw IOException)
+		// Create connection to brickd
+		IPConnection ipcon = new IPConnection(host, port); // Can throw IOException
 
 		BrickletVoltage vol = new BrickletVoltage(UID); // Create device object
-		ipcon.addDevice(vol); // Add device to ip connection (Can throw IPConnection.TimeoutException)
+
+		// Add device to ip connection
+		ipcon.addDevice(vol); // Can throw IPConnection.TimeoutException
 		// Don't use device before it is added to a connection
 		
 
@@ -22,7 +25,8 @@ public class ExampleThreshold {
 		// Configure threshold for "smaller than 5V" (unit is mV)
 		vol.setVoltageCallbackThreshold('<', (short)(5*1000), (short)0);
 
-		// Add and implement voltage reached listener (called if voltage is smaller than 5V)
+		// Add and implement voltage reached listener 
+		// (called if voltage is smaller than 5V)
 		vol.addListener(new BrickletVoltage.VoltageReachedListener() {
 			public void voltageReached(int voltage) {
 				System.out.println("Voltage dropped below 5V: " + voltage/1000.0);
