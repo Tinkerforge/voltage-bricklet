@@ -5,8 +5,8 @@ HOST = "localhost"
 PORT = 4223
 UID = "ABC" # Change to your UID
 
-from ip_connection import IPConnection
-from bricklet_voltage import Voltage
+from tinkerforge.ip_connection import IPConnection
+from tinkerforge.bricklet_voltage import Voltage
 
 # Callback for voltage smaller than 5V
 def cb_reached(voltage):
