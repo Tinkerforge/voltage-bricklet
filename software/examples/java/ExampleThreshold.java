@@ -11,13 +11,11 @@ public class ExampleThreshold {
 	public static void main(String args[]) throws Exception {
 		// Create connection to brickd
 		IPConnection ipcon = new IPConnection(host, port); // Can throw IOException
-
 		BrickletVoltage vol = new BrickletVoltage(UID); // Create device object
 
-		// Add device to ip connection
+		// Add device to IP connection
 		ipcon.addDevice(vol); // Can throw IPConnection.TimeoutException
 		// Don't use device before it is added to a connection
-		
 
 		// Get threshold callbacks with a debounce time of 10 seconds (10000ms)
 		vol.setDebouncePeriod(10000);
@@ -32,7 +30,7 @@ public class ExampleThreshold {
 				System.out.println("Voltage dropped below 5V: " + voltage/1000.0);
 			}
 		});
-		
+
 		System.out.println("Press ctrl+c to exit");
 		ipcon.joinThread();
 	}

@@ -16,9 +16,8 @@ class Example
 	{
 		IPConnection ipcon = new IPConnection(HOST, PORT); // Create connection to brickd
 		BrickletVoltage vol = new BrickletVoltage(UID); // Create device object
-		ipcon.AddDevice(vol); // Add device to ip connection
+		ipcon.AddDevice(vol); // Add device to IP connection
 		// Don't use device before it is added to a connection
-
 
 		// Get threshold callbacks with a debounce time of 1 seconds (1000ms)
 		vol.SetDebouncePeriod(1000);
@@ -31,5 +30,5 @@ class Example
 
 		System.Console.WriteLine("Press ctrl+c to exit");
 		ipcon.JoinThread();
-    }
+	}
 }

@@ -13,10 +13,10 @@ def cb_voltage(voltage):
     print('Voltage: ' + str(voltage/1000.0) + ' V')
 
 if __name__ == "__main__":
-    ipcon = IPConnection(HOST, PORT) # Create ip connection to brickd
+    ipcon = IPConnection(HOST, PORT) # Create IP connection to brickd
 
     v = Voltage(UID) # Create device object
-    ipcon.add_device(v) # Add device to ip connection
+    ipcon.add_device(v) # Add device to IP connection
     # Don't use device before it is added to a connection
 
     # Set Period for voltage callback to 1s (1000ms)
