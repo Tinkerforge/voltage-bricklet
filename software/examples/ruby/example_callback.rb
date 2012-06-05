@@ -21,7 +21,7 @@ ipcon.add_device v # Add device to IP connection
 v.set_voltage_callback_period 1000
 
 # Register voltage callback (parameter has unit mV)
-v.register_callback BrickletVoltage::CALLBACK_VOLTAGE, do |voltage|
+v.register_callback(BrickletVoltage::CALLBACK_VOLTAGE) do |voltage|
   puts "Voltage: #{voltage/1000.0} V"
 end
 
