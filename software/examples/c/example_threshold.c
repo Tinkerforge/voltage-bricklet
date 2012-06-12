@@ -41,6 +41,7 @@ int main() {
 	// Configure threshold for "smaller than 5V" (unit is mV)
 	voltage_set_voltage_callback_threshold(&v, '<', 5*1000, 0);
 
-	printf("Press ctrl+c to close\n");
-	ipcon_join_thread(&ipcon); // Join mainloop of IP connection
+	printf("Press key to exit\n");
+	getchar();
+	ipcon_destroy(&ipcon);
 }

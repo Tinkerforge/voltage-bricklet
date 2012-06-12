@@ -40,6 +40,7 @@ int main() {
 	// Register voltage callback to function cb_voltage
 	voltage_register_callback(&v, VOLTAGE_CALLBACK_VOLTAGE, cb_voltage);
 
-	printf("Press ctrl+c to close\n");
-	ipcon_join_thread(&ipcon); // Join mainloop of IP connection
+	printf("Press key to exit\n");
+	getchar();
+	ipcon_destroy(&ipcon);
 }
