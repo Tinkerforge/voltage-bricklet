@@ -1,5 +1,5 @@
 /* voltage-bricklet
- * Copyright (C) 2011 Olaf Lüke <olaf@tinkerforge.com>
+ * Copyright (C) 2011-2012 Olaf Lüke <olaf@tinkerforge.com>
  *
  * voltage.c: Implementation of Voltage Bricklet messages
  *
@@ -21,12 +21,11 @@
 
 #include "voltage.h"
 
-#include <adc/adc.h>
-
 #include "bricklib/bricklet/bricklet_communication.h"
 #include "bricklib/utility/util_definitions.h"
 #include "brickletlib/bricklet_entry.h"
 #include "brickletlib/bricklet_simple.h"
+#include "bricklib/drivers/adc/adc.h"
 #include "config.h"
 
 #define MAX_ADC_VALUE ((1  << 12) - 1)
@@ -52,13 +51,18 @@ const SimpleMessageProperty smp[] = {
 };
 
 const SimpleUnitProperty sup[] = {
-	{voltage_from_analog_value, SIMPLE_SIGNEDNESS_UINT, TYPE_VOLTAGE, TYPE_VOLTAGE_REACHED, SIMPLE_UNIT_ANALOG_VALUE}, // voltage
-	{analog_value_from_mc, SIMPLE_SIGNEDNESS_UINT, TYPE_ANALOG_VALUE, TYPE_ANALOG_VALUE_REACHED, SIMPLE_UNIT_ANALOG_VALUE}, // analog value
+	{voltage_from_analog_value, SIMPLE_SIGNEDNESS_UINT, FID_VOLTAGE, FID_VOLTAGE_REACHED, SIMPLE_UNIT_ANALOG_VALUE}, // voltage
+	{analog_value_from_mc, SIMPLE_SIGNEDNESS_UINT, FID_ANALOG_VALUE, FID_ANALOG_VALUE_REACHED, SIMPLE_UNIT_ANALOG_VALUE}, // analog value
 };
 
+const uint8_t smp_length = sizeof(smp);
 
-void invocation(uint8_t com, uint8_t *data) {
+void invocation(const ComType com, const uint8_t *data) {
 	simple_invocation(com, data);
+
+	if(((MessageHeader*)data)->fid > FID_LAST) {
+		BA->com_return_error(data, sizeof(MessageHeader), MESSAGE_ERROR_CODE_NOT_SUPPORTED, com);
+	}
 }
 
 void constructor(void) {
@@ -72,11 +76,11 @@ void destructor(void) {
 	adc_channel_disable(BS->adc_channel);
 }
 
-int32_t analog_value_from_mc(int32_t value) {
+int32_t analog_value_from_mc(const int32_t value) {
 	return (uint16_t)BA->adc_channel_get_data(BS->adc_channel);
 }
 
-int32_t voltage_from_analog_value(int32_t value) {
+int32_t voltage_from_analog_value(const int32_t value) {
 	BC->voltage_avg_sum += value;
 
 	if(BC->tick % VOLTAGE_AVERAGE == 0) {
@@ -96,6 +100,6 @@ int32_t voltage_from_analog_value(int32_t value) {
 	return BC->voltage_avg;
 }
 
-void tick(uint8_t tick_type) {
+void tick(const uint8_t tick_type) {
 	simple_tick(tick_type);
 }
