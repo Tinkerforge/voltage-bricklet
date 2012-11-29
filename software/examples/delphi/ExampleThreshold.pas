@@ -12,7 +12,7 @@ type
     ipcon: TIPConnection;
     v: TBrickletVoltage;
   public
-    procedure ReachedCB(const voltage: word);
+    procedure ReachedCB(sender: TObject; const voltage: word);
     procedure Execute;
   end;
 
@@ -25,22 +25,22 @@ var
   e: TExample;
 
 { Callback for voltage smaller than 5V }
-procedure TExample.ReachedCB(const voltage: word);
+procedure TExample.ReachedCB(sender: TObject; const voltage: word);
 begin
   WriteLn(Format('Voltage dropped below 5V: %f', [voltage/1000.0]));
 end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection to brickd }
-  ipcon := TIPConnection.Create(HOST, PORT);
+  { Create IP connection }
+  ipcon := TIPConnection.Create();
 
   { Create device object }
-  v := TBrickletVoltage.Create(UID);
+  v := TBrickletVoltage.Create(UID, ipcon);
 
-  { Add device to IP connection }
-  ipcon.AddDevice(v);
-  { Don't use device before it is added to a connection }
+  { Connect to brickd }
+  ipcon.Connect(HOST, PORT);
+  { Don't use device before ipcon is connected }
 
   { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
   v.SetDebouncePeriod(10000);
@@ -53,7 +53,6 @@ begin
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy;
 end;
 
 begin

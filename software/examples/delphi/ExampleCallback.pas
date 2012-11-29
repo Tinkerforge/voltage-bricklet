@@ -12,7 +12,7 @@ type
     ipcon: TIPConnection;
     v: TBrickletVoltage;
   public
-    procedure VoltageCB(const voltage: word);
+    procedure VoltageCB(sender: TObject; const voltage: word);
     procedure Execute;
   end;
 
@@ -25,22 +25,22 @@ var
   e: TExample;
 
 { Callback function for voltage callback (parameter has unit mV) }
-procedure TExample.VoltageCB(const voltage: word);
+procedure TExample.VoltageCB(sender: TObject; const voltage: word);
 begin
   WriteLn(Format('Voltage: %f V', [voltage/1000.0]));
 end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection to brickd }
-  ipcon := TIPConnection.Create(HOST, PORT);
+  { Create IP connection }
+  ipcon := TIPConnection.Create();
 
   { Create device object }
-  v := TBrickletVoltage.Create(UID);
+  v := TBrickletVoltage.Create(UID, ipcon);
 
-  { Add device to IP connection }
-  ipcon.AddDevice(v);
-  { Don't use device before it is added to a connection }
+  { Connect to brickd }
+  ipcon.Connect(HOST, PORT);
+  { Don't use device before ipcon is connected }
 
   { Set Period for voltage callback to 1s (1000ms)
     Note: The callback is only called every second if the 
@@ -52,7 +52,6 @@ begin
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy;
 end;
 
 begin
