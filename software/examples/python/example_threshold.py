@@ -13,11 +13,11 @@ def cb_reached(voltage):
     print('Voltage dropped below 5V: ' + str(voltage/1000.0))
 
 if __name__ == "__main__":
-    ipcon = IPConnection(HOST, PORT) # Create IP connection to brickd
+    ipcon = IPConnection() # Create IP connection
+    v = Voltage(UID, ipcon) # Create device object
 
-    v = Voltage(UID) # Create device object
-    ipcon.add_device(v) # Add device to IP connection
-    # Don't use device before it is added to a connection
+    ipcon.connect(HOST, PORT) # Connect to brickd
+    # Don't use device before ipcon is connected
 
     # Get threshold callbacks with a debounce time of 10 seconds (10000ms)
     v.set_debounce_period(10000)
@@ -29,4 +29,3 @@ if __name__ == "__main__":
     v.set_voltage_callback_threshold('<', 5*1000, 0)
 
     raw_input('Press key to exit\n') # Use input() in Python 3
-    ipcon.destroy()
