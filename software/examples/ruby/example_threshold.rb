@@ -10,10 +10,11 @@ HOST = 'localhost'
 PORT = 4223
 UID = 'ABC' # Change to your UID
 
-ipcon = IPConnection.new HOST, PORT # Create IP connection to brickd
-v = BrickletVoltage.new UID # Create device object
-ipcon.add_device v # Add device to IP connection
-# Don't use device before it is added to a connection
+ipcon = IPConnection.new # Create IP connection
+v = BrickletVoltage.new UID, ipcon # Create device object
+
+ipcon.connect HOST, PORT # Connect to brickd
+# Don't use device before ipcon is connected
 
 # Get threshold callbacks with a debounce time of 10 seconds (10000ms)
 v.set_debounce_period 10000
@@ -28,4 +29,3 @@ v.set_voltage_callback_threshold '<', 5*1000, 0
 
 puts 'Press key to exit'
 $stdin.gets
-ipcon.destroy
