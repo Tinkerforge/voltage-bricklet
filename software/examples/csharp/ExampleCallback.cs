@@ -7,17 +7,18 @@ class Example
 	private static string UID = "ABC"; // Change to your UID
 
 	// Callback function for voltage callback (parameter has unit mV)
-	static void VoltageCB(ushort voltage)
+	static void VoltageCB(object sender, int voltage)
 	{
 		System.Console.WriteLine("Voltage: " + voltage/1000.0 + " V");
 	}
 
 	static void Main() 
 	{
-		IPConnection ipcon = new IPConnection(HOST, PORT); // Create connection to brickd
-		BrickletVoltage vol = new BrickletVoltage(UID); // Create device object
-		ipcon.AddDevice(vol); // Add device to IP connection
-		// Don't use device before it is added to a connection
+		IPConnection ipcon = new IPConnection(); // Create IP connection
+		BrickletVoltage vol = new BrickletVoltage(UID, ipcon); // Create device object
+
+		ipcon.Connect(HOST, PORT); // Connect to brickd
+		// Don't use device before ipcon is connected
 
 		// Set Period for voltage callback to 1s (1000ms)
 		// Note: The voltage callback is only called every second if the 
@@ -25,10 +26,9 @@ class Example
 		vol.SetVoltageCallbackPeriod(1000);
 
 		// Register voltage callback to function VoltageCB
-		vol.RegisterCallback(new BrickletVoltage.Voltage(VoltageCB));
+		vol.Voltage += VoltageCB;
 
 		System.Console.WriteLine("Press key to exit");
 		System.Console.ReadKey();
-		ipcon.Destroy();
 	}
 }
