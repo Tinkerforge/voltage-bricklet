@@ -10,6 +10,8 @@
 
 // Callback function for voltage callback (parameter has unit mV)
 void cb_voltage(uint16_t voltage, void *user_data) {
+	(void)user_data; // avoid unused parameter warning
+
 	printf("Voltage: %f V\n", voltage/1000.0);
 }
 
@@ -35,10 +37,10 @@ int main() {
 	voltage_set_voltage_callback_period(&v, 1000);
 
 	// Register voltage callback to function cb_voltage
-	voltage_register_callback(&v, 
-	                          VOLTAGE_CALLBACK_VOLTAGE, 
-							  cb_voltage,
-							  NULL);
+	voltage_register_callback(&v,
+	                          VOLTAGE_CALLBACK_VOLTAGE,
+	                          cb_voltage,
+	                          NULL);
 
 	printf("Press key to exit\n");
 	getchar();

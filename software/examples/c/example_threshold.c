@@ -10,6 +10,8 @@
 
 // Callback for voltage smaller than 5V
 void cb_reached(uint16_t voltage, void *user_data) {
+	(void)user_data; // avoid unused parameter warning
+
 	printf("Voltage dropped below 5V: %f\n", voltage/1000.0);
 }
 
@@ -33,10 +35,10 @@ int main() {
 	voltage_set_debounce_period(&v, 10000);
 
 	// Register threshold reached callback to function cb_reached
-	voltage_register_callback(&v, 
-	                          VOLTAGE_CALLBACK_VOLTAGE_REACHED, 
-							  cb_reached,
-							  NULL);
+	voltage_register_callback(&v,
+	                          VOLTAGE_CALLBACK_VOLTAGE_REACHED,
+	                          cb_reached,
+	                          NULL);
 
 	// Configure threshold for "smaller than 5V" (unit is mV)
 	voltage_set_voltage_callback_threshold(&v, '<', 5*1000, 0);
