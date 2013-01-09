@@ -7,7 +7,7 @@ class Example
 	private static string UID = "ABC"; // Change to your UID
 
 	// Callback for voltage smaller than 5V
-	static void ReachedCB(object sender, int voltage)
+	static void ReachedCB(BrickletVoltage sender, int voltage)
 	{
 		System.Console.WriteLine("Voltage dopped below 5V: " + voltage/1000.0 + "V");
 	}

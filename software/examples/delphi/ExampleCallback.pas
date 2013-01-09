@@ -12,7 +12,7 @@ type
     ipcon: TIPConnection;
     v: TBrickletVoltage;
   public
-    procedure VoltageCB(sender: TObject; const voltage: word);
+    procedure VoltageCB(sender: TBrickletVoltage; const voltage: word);
     procedure Execute;
   end;
 
@@ -25,7 +25,7 @@ var
   e: TExample;
 
 { Callback function for voltage callback (parameter has unit mV) }
-procedure TExample.VoltageCB(sender: TObject; const voltage: word);
+procedure TExample.VoltageCB(sender: TBrickletVoltage; const voltage: word);
 begin
   WriteLn(Format('Voltage: %f V', [voltage/1000.0]));
 end;

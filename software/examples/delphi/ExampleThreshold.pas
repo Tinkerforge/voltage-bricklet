@@ -12,7 +12,7 @@ type
     ipcon: TIPConnection;
     v: TBrickletVoltage;
   public
-    procedure ReachedCB(sender: TObject; const voltage: word);
+    procedure ReachedCB(sender: TBrickletVoltage; const voltage: word);
     procedure Execute;
   end;
 
@@ -25,7 +25,7 @@ var
   e: TExample;
 
 { Callback for voltage smaller than 5V }
-procedure TExample.ReachedCB(sender: TObject; const voltage: word);
+procedure TExample.ReachedCB(sender: TBrickletVoltage; const voltage: word);
 begin
   WriteLn(Format('Voltage dropped below 5V: %f', [voltage/1000.0]));
 end;
