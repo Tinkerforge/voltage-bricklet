@@ -21,7 +21,7 @@ public class ExampleCallback {
 		vol.setVoltageCallbackPeriod(1000);
 
 		// Add and implement voltage listener (called if voltage changes)
-		vol.addListener(new BrickletVoltage.VoltageListener() {
+		vol.addVoltageListener(new BrickletVoltage.VoltageListener() {
 			public void voltage(int voltage) {
 				System.out.println("Voltage: " + voltage/1000.0 + " V");
 			}

@@ -23,7 +23,7 @@ public class ExampleThreshold {
 
 		// Add and implement voltage reached listener 
 		// (called if voltage is smaller than 5V)
-		vol.addListener(new BrickletVoltage.VoltageReachedListener() {
+		vol.addVoltageReachedListener(new BrickletVoltage.VoltageReachedListener() {
 			public void voltageReached(int voltage) {
 				System.out.println("Voltage dropped below 5V: " + voltage/1000.0);
 			}
