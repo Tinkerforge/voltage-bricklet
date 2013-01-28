@@ -16,7 +16,7 @@ public class ExampleSimple {
 		// Don't use device before ipcon is connected
 
 		// Get current voltage (unit is mV)
-		int voltage = vol.getVoltage(); // Can throw IPConnection.TimeoutException
+		int voltage = vol.getVoltage(); // Can throw com.tinkerforge.TimeoutException
 
 		System.out.println("Voltage: " + voltage/1000.0 + " V");
 
