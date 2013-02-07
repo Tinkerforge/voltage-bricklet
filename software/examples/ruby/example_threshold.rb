@@ -29,3 +29,4 @@ v.set_voltage_callback_threshold '<', 5*1000, 0
 
 puts 'Press key to exit'
 $stdin.gets
+ipcon.disconnect

@@ -21,5 +21,6 @@ public class ExampleSimple {
 		System.out.println("Voltage: " + voltage/1000.0 + " V");
 
 		System.console().readLine("Press key to exit\n");
+		ipcon.disconnect();
 	}
 }
