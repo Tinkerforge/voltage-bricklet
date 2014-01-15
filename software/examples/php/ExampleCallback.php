@@ -6,9 +6,9 @@ require_once('Tinkerforge/BrickletVoltage.php');
 use Tinkerforge\IPConnection;
 use Tinkerforge\BrickletVoltage;
 
-$host = 'localhost';
-$port = 4223;
-$uid = 'ABC'; // Change to your UID
+const HOST = 'localhost';
+const PORT = 4223;
+const UID = 'ABC'; // Change to your UID
 
 // Callback function for voltage callback (parameter has unit mV)
 function cb_voltage($voltage)
@@ -17,9 +17,9 @@ function cb_voltage($voltage)
 }
 
 $ipcon = new IPConnection(); // Create IP connection
-$v = new BrickletVoltage($uid, $ipcon); // Create device object
+$v = new BrickletVoltage(UID, $ipcon); // Create device object
 
-$ipcon->connect($host, $port); // Connect to brickd
+$ipcon->connect(HOST, PORT); // Connect to brickd
 // Don't use device before ipcon is connected
 
 // Set Period for voltage callback to 1s (1000ms)
