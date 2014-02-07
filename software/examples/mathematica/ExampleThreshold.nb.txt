@@ -1,0 +1,30 @@
+Needs["NETLink`"]
+LoadNETAssembly["Tinkerforge",NotebookDirectory[]<>"../../.."]
+
+host="localhost"
+port=4223
+uid="amb"(* Change to your UID *)
+
+(* Create IPConnection and device object *)
+ipcon=NETNew["Tinkerforge.IPConnection"]
+v=NETNew["Tinkerforge.BrickletVoltage",uid,ipcon]
+ipcon@Connect[host,port]
+
+(* Get threshold callbacks with a debounce time of 10 seconds (10000ms) *)
+v@SetDebouncePeriod[10000]
+
+(* Callback for illuminance greater than 200 Lux *)
+VoltageReachedCB[sender_,voltage_]:=
+ Print["Voltage dopped below 5V: "<>ToString[N[Quantity[voltage,"mV"]]]]
+AddEventHandler[v@VoltageReached,VoltageReachedCB]
+
+(* Callback for voltage smaller than 5V *)
+option=Tinkerforge`BrickletVoltage`THRESHOLDUOPTIONUSMALLER
+v@SetVoltageCallbackThreshold[option,5*1000,0]
+
+Input["Click OK to exit"]
+
+(* Clean up *)
+ipcon@Disconnect[]
+ReleaseNETObject[al]
+ReleaseNETObject[ipcon]
