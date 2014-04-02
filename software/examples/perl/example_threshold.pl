@@ -14,8 +14,10 @@ my $v = Tinkerforge::BrickletVoltage->new(&UID, $ipcon); # Create device object
 sub cb_reached
 {
     my ($voltage) = @_;
-    print "\nVoltage dropped below 5V: ".$voltage/1000.0." \n";
+
+    print "Voltage dropped below 5V: ".$voltage/1000.0." \n";
 }
+
 $ipcon->connect(&HOST, &PORT); # Connect to brickd
 # Don't use device before ipcon is connected
 
@@ -28,6 +30,6 @@ $v->register_callback($v->CALLBACK_VOLTAGE_REACHED, 'cb_reached');
 # Configure threshold for "smaller than 5V" (unit is mV)
 $v->set_voltage_callback_threshold('<', 5*1000, 0);
 
-print "\nPress any key to exit...\n";
+print "Press any key to exit...\n";
 <STDIN>;
 $ipcon->disconnect();

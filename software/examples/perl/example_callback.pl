@@ -14,7 +14,8 @@ my $v = Tinkerforge::BrickletVoltage->new(&UID, $ipcon); # Create device object
 sub cb_voltage
 {
     my ($voltage) = @_;
-    print"\nVoltage: ".$voltage/1000.0." V\n";
+
+    print "Voltage: ".$voltage/1000.0." V\n";
 }
 
 $ipcon->connect(&HOST, &PORT); # Connect to brickd
@@ -28,6 +29,6 @@ $v->set_voltage_callback_period(1000);
 # Register voltage callback to function cb_voltage
 $v->register_callback($v->CALLBACK_VOLTAGE, 'cb_voltage');
 
-print "\nPress any key to exit...\n";
+print "Press any key to exit...\n";
 <STDIN>;
 $ipcon->disconnect();
