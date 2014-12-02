@@ -29,8 +29,8 @@ class Example
 		// Configure threshold for "smaller than 5V" (unit is mV)
 		vol.SetVoltageCallbackThreshold('<', 5*1000, 0);
 
-		System.Console.WriteLine("Press key to exit");
-		System.Console.ReadKey();
+		System.Console.WriteLine("Press enter to exit");
+		System.Console.ReadLine();
 		ipcon.Disconnect();
 	}
 }
