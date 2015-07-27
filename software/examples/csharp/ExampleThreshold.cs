@@ -4,30 +4,30 @@ class Example
 {
 	private static string HOST = "localhost";
 	private static int PORT = 4223;
-	private static string UID = "ABC"; // Change to your UID
+	private static string UID = "XYZ"; // Change to your UID
 
-	// Callback for voltage smaller than 5V
-	static void ReachedCB(BrickletVoltage sender, int voltage)
+	// Callback function for voltage greater than 5 V (parameter has unit mV)
+	static void VoltageReachedCB(BrickletVoltage sender, int voltage)
 	{
-		System.Console.WriteLine("Voltage dopped below 5V: " + voltage/1000.0 + "V");
+		System.Console.WriteLine("Voltage: " + voltage/1000.0 + " V");
 	}
 
-	static void Main() 
+	static void Main()
 	{
 		IPConnection ipcon = new IPConnection(); // Create IP connection
-		BrickletVoltage vol = new BrickletVoltage(UID, ipcon); // Create device object
+		BrickletVoltage v = new BrickletVoltage(UID, ipcon); // Create device object
 
 		ipcon.Connect(HOST, PORT); // Connect to brickd
 		// Don't use device before ipcon is connected
 
 		// Get threshold callbacks with a debounce time of 10 seconds (10000ms)
-		vol.SetDebouncePeriod(10000);
+		v.SetDebouncePeriod(10000);
 
-		// Register threshold reached callback to function ReachedCB
-		vol.VoltageReached += ReachedCB;
+		// Register threshold reached callback to function VoltageReachedCB
+		v.VoltageReached += VoltageReachedCB;
 
-		// Configure threshold for "smaller than 5V" (unit is mV)
-		vol.SetVoltageCallbackThreshold('<', 5*1000, 0);
+		// Configure threshold for "greater than 5 V" (unit is mV)
+		v.SetVoltageCallbackThreshold('>', 5*1000, 0);
 
 		System.Console.WriteLine("Press enter to exit");
 		System.Console.ReadLine();

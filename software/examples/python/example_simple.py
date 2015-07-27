@@ -1,9 +1,9 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-  
+# -*- coding: utf-8 -*-
 
 HOST = "localhost"
 PORT = 4223
-UID = "ABC" # Change to your UID
+UID = "XYZ" # Change to your UID
 
 from tinkerforge.ip_connection import IPConnection
 from tinkerforge.bricklet_voltage import Voltage
@@ -17,7 +17,6 @@ if __name__ == "__main__":
 
     # Get current voltage (unit is mV)
     voltage = v.get_voltage()
-
     print('Voltage: ' + str(voltage/1000.0) + ' V')
 
     raw_input('Press key to exit\n') # Use input() in Python 3
