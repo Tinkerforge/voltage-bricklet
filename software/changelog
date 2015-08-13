@@ -9,3 +9,6 @@
 
 2.0.1:
 - Don't send threshold callback twice
+
+2.0.2:
+- Fix value range for threshold configuration
