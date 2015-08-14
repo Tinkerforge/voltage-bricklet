@@ -19,7 +19,7 @@ public class ExampleThreshold {
 		v.setDebouncePeriod(10000);
 
 		// Configure threshold for "greater than 5 V" (unit is mV)
-		v.setVoltageCallbackThreshold('>', (short)(5*1000), (short)0);
+		v.setVoltageCallbackThreshold('>', 5*1000, 0);
 
 		// Add threshold reached listener for voltage greater than 5 V (parameter has unit mV)
 		v.addVoltageReachedListener(new BrickletVoltage.VoltageReachedListener() {
