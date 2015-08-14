@@ -12,22 +12,22 @@ type
     ipcon: TIPConnection;
     v: TBrickletVoltage;
   public
-    procedure ReachedCB(sender: TBrickletVoltage; const voltage: word);
+    procedure VoltageReachedCB(sender: TBrickletVoltage; const voltage: word);
     procedure Execute;
   end;
 
 const
   HOST = 'localhost';
   PORT = 4223;
-  UID = 'ABC'; { Change to your UID }
+  UID = 'XYZ'; { Change to your UID }
 
 var
   e: TExample;
 
-{ Callback for voltage smaller than 5V }
-procedure TExample.ReachedCB(sender: TBrickletVoltage; const voltage: word);
+{ Callback procedure for voltage greater than 5 V (parameter has unit mV) }
+procedure TExample.VoltageReachedCB(sender: TBrickletVoltage; const voltage: word);
 begin
-  WriteLn(Format('Voltage dropped below 5V: %f', [voltage/1000.0]));
+  WriteLn(Format('Voltage: %f V', [voltage/1000.0]));
 end;
 
 procedure TExample.Execute;
@@ -45,11 +45,11 @@ begin
   { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
   v.SetDebouncePeriod(10000);
 
-  { Register threshold reached callback to procedure ReachedCB }
-  v.OnVoltageReached := {$ifdef FPC}@{$endif}ReachedCB;
+  { Register threshold reached callback to procedure VoltageReachedCB }
+  v.OnVoltageReached := {$ifdef FPC}@{$endif}VoltageReachedCB;
 
-  { Configure threshold for "greater than 200 Lux" (unit is Lux/10) }
-  v.SetVoltageCallbackThreshold('<', 5*1000, 0);
+  { Configure threshold for "greater than 5 V" (unit is mV) }
+  v.SetVoltageCallbackThreshold('>', 5*1000, 0);
 
   WriteLn('Press key to exit');
   ReadLn;
