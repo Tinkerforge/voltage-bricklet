@@ -3,7 +3,7 @@ Imports Tinkerforge
 Module ExampleCallback
     Const HOST As String = "localhost"
     Const PORT As Integer = 4223
-    Const UID As String = "aNt" ' Change to your UID
+    Const UID As String = "XYZ" ' Change to your UID
 
     ' Callback function for voltage callback (parameter has unit mV)
     Sub VoltageCB(ByVal sender As BrickletVoltage, ByVal voltage As Integer)
@@ -12,18 +12,18 @@ Module ExampleCallback
 
     Sub Main()
         Dim ipcon As New IPConnection() ' Create IP connection
-        Dim vol As New BrickletVoltage(UID, ipcon) ' Create device object
+        Dim v As New BrickletVoltage(UID, ipcon) ' Create device object
 
         ipcon.Connect(HOST, PORT) ' Connect to brickd
         ' Don't use device before ipcon is connected
 
-        ' Set Period for voltage callback to 1s (1000ms)
-        ' Note: The voltage callback is only called every second if the 
-        '       voltage has changed since the last call!
-        vol.SetVoltageCallbackPeriod(1000)
+        ' Set period for voltage callback to 1s (1000ms)
+        ' Note: The voltage callback is only called every second
+        '       if the voltage has changed since the last call!
+        v.SetVoltageCallbackPeriod(1000)
 
         ' Register voltage callback to function VoltageCB
-        AddHandler vol.Voltage, AddressOf VoltageCB
+        AddHandler v.Voltage, AddressOf VoltageCB
 
         System.Console.WriteLine("Press key to exit")
         System.Console.ReadLine()
