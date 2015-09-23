@@ -30,16 +30,16 @@ int main(void) {
 	}
 	// Don't use device before ipcon is connected
 
-	// Set period for voltage callback to 1s (1000ms)
-	// Note: The voltage callback is only called every second
-	//       if the voltage has changed since the last call!
-	voltage_set_voltage_callback_period(&v, 1000);
-
 	// Register voltage callback to function cb_voltage
 	voltage_register_callback(&v,
 	                          VOLTAGE_CALLBACK_VOLTAGE,
 	                          (void *)cb_voltage,
 	                          NULL);
+
+	// Set period for voltage callback to 1s (1000ms)
+	// Note: The voltage callback is only called every second
+	//       if the voltage has changed since the last call!
+	voltage_set_voltage_callback_period(&v, 1000);
 
 	printf("Press key to exit\n");
 	getchar();

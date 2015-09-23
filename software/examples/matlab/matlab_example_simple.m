@@ -4,7 +4,7 @@ function matlab_example_simple()
 
     HOST = 'localhost';
     PORT = 4223;
-    UID = 'abd2'; % Change to your UID
+    UID = 'XYZ'; % Change to your UID
 
     ipcon = IPConnection(); % Create IP connection
     v = BrickletVoltage(UID, ipcon); % Create device object
@@ -14,8 +14,8 @@ function matlab_example_simple()
 
     % Get current voltage (unit is mV)
     voltage = v.getVoltage();
-    fprintf('Voltage: %g V', voltage/1000.0);
+    fprintf('Voltage: %g V\n', voltage/1000.0);
 
-    input('Press any key to exit...\n', 's');
+    input('Press key to exit\n', 's');
     ipcon.disconnect();
 end

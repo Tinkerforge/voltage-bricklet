@@ -34,20 +34,20 @@
                 var v = new Tinkerforge.BrickletVoltage(UID, ipcon); // Create device object
                 ipcon.connect(HOST, PORT,
                     function(error) {
-                        textArea.value += 'Error: '+error+ '\n';
+                        textArea.value += 'Error: ' + error + '\n';
                     }
                 ); // Connect to brickd
                 // Don't use device before ipcon is connected
 
                 ipcon.on(Tinkerforge.IPConnection.CALLBACK_CONNECTED,
-                    function(connectReason) {
+                    function (connectReason) {
                         // Get current voltage (unit is mV)
                         v.getVoltage(
-                            function(voltage) {
-                                textArea.value += 'Voltage: '+voltage/1000+' V\n';
+                            function (voltage) {
+                                textArea.value += 'Voltage: ' + voltage/1000.0 + ' V\n';
                             },
-                            function(error) {
-                                textArea.value += 'Error: '+error+'\n';
+                            function (error) {
+                                textArea.value += 'Error: ' + error + '\n';
                             }
                         );
                     }

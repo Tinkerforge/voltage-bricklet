@@ -3,17 +3,17 @@ LoadNETAssembly["Tinkerforge",NotebookDirectory[]<>"../../.."]
 
 host="localhost"
 port=4223
-uid="amb"(* Change to your UID *)
+uid="XYZ"(*Change to your UID*)
 
-(* Create IPConnection and device object *)
+(*Create IPConnection and device object*)
 ipcon=NETNew["Tinkerforge.IPConnection"]
 v=NETNew["Tinkerforge.BrickletVoltage",uid,ipcon]
 ipcon@Connect[host,port]
 
-(* Get current voltage (unit is mV) *)
-Print["Voltage: "<>ToString[N[Quantity[v@GetVoltage[],"mV"]]]]
+(*Get current voltage (unit is mV)*)
+Print["Voltage: "<>ToString[N[Quantity[v@GetVoltage[],"V/1000"]]]]
 
-(* Clean up *)
+(*Clean up*)
 ipcon@Disconnect[]
 ReleaseNETObject[v]
 ReleaseNETObject[ipcon]

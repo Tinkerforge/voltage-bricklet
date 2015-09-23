@@ -24,7 +24,7 @@ const
 var
   e: TExample;
 
-{ Callback procedure for voltage greater than 5 V (parameter has unit mV) }
+{ Callback procedure for voltage reached callback (parameter has unit mV) }
 procedure TExample.VoltageReachedCB(sender: TBrickletVoltage; const voltage: word);
 begin
   WriteLn(Format('Voltage: %f V', [voltage/1000.0]));
@@ -45,10 +45,10 @@ begin
   { Get threshold callbacks with a debounce time of 10 seconds (10000ms) }
   v.SetDebouncePeriod(10000);
 
-  { Register threshold reached callback to procedure VoltageReachedCB }
+  { Register voltage reached callback to procedure VoltageReachedCB }
   v.OnVoltageReached := {$ifdef FPC}@{$endif}VoltageReachedCB;
 
-  { Configure threshold for "greater than 5 V" (unit is mV) }
+  { Configure threshold for voltage "greater than 5 V" (unit is mV) }
   v.SetVoltageCallbackThreshold('>', 5*1000, 0);
 
   WriteLn('Press key to exit');

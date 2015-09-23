@@ -8,9 +8,9 @@ UID = "XYZ" # Change to your UID
 from tinkerforge.ip_connection import IPConnection
 from tinkerforge.bricklet_voltage import BrickletVoltage
 
-# Callback function for voltage greater than 5 V (parameter has unit mV)
+# Callback function for voltage reached callback (parameter has unit mV)
 def cb_voltage_reached(voltage):
-    print('Voltage: ' + str(voltage/1000.0) + ' V')
+    print("Voltage: " + str(voltage/1000.0) + " V")
 
 if __name__ == "__main__":
     ipcon = IPConnection() # Create IP connection
@@ -22,11 +22,11 @@ if __name__ == "__main__":
     # Get threshold callbacks with a debounce time of 10 seconds (10000ms)
     v.set_debounce_period(10000)
 
-    # Register threshold reached callback to function cb_voltage_reached
+    # Register voltage reached callback to function cb_voltage_reached
     v.register_callback(v.CALLBACK_VOLTAGE_REACHED, cb_voltage_reached)
 
-    # Configure threshold for "greater than 5 V" (unit is mV)
-    v.set_voltage_callback_threshold('>', 5*1000, 0)
+    # Configure threshold for voltage "greater than 5 V" (unit is mV)
+    v.set_voltage_callback_threshold(">", 5*1000, 0)
 
-    raw_input('Press key to exit\n') # Use input() in Python 3
+    raw_input("Press key to exit\n") # Use input() in Python 3
     ipcon.disconnect()

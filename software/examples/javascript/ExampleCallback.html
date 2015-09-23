@@ -34,24 +34,25 @@
                 var v = new Tinkerforge.BrickletVoltage(UID, ipcon); // Create device object
                 ipcon.connect(HOST, PORT,
                     function(error) {
-                        textArea.value += 'Error: '+error+ '\n';
+                        textArea.value += 'Error: ' + error + '\n';
                     }
                 ); // Connect to brickd
                 // Don't use device before ipcon is connected
 
                 ipcon.on(Tinkerforge.IPConnection.CALLBACK_CONNECTED,
-                    function(connectReason) {
-                        // Set Period for voltage callback to 1s (1000ms)
-                        // Note: The callback is only called every second if the
-                        // voltage has changed since the last call!
+                    function (connectReason) {
+                        // Set period for voltage callback to 1s (1000ms)
+                        // Note: The voltage callback is only called every second
+                        //       if the voltage has changed since the last call!
                         v.setVoltageCallbackPeriod(1000);
                     }
                 );
+
                 // Register voltage callback
-                v.on(Tinkerforge.BrickletAnalogIn.CALLBACK_VOLTAGE,
+                v.on(Tinkerforge.BrickletVoltage.CALLBACK_VOLTAGE,
                     // Callback function for voltage callback (parameter has unit mV)
-                    function(voltage) {
-                        textArea.value += 'Voltage: '+voltage/1000+' V\n';
+                    function (voltage) {
+                        textArea.value += 'Voltage: ' + voltage/1000.0 + ' V\n';
                         textArea.scrollTop = textArea.scrollHeight;
                     }
                 );

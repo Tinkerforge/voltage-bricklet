@@ -1,13 +1,16 @@
 #!/bin/sh
-# connects to localhost:4223 by default, use --host and --port to change it
+# Connects to localhost:4223 by default, use --host and --port to change this
 
-# change to your UID
-uid=XYZ
+uid=XYZ # Change to your UID
 
-# set period for voltage callback to 1s (1000ms)
-# note: the voltage callback is only called every second if the
-#       voltage has changed since the last call!
+# Handle incoming voltage callbacks (parameter has unit mV)
+tinkerforge dispatch voltage-bricklet $uid voltage &
+
+# Set period for voltage callback to 1s (1000ms)
+# Note: The voltage callback is only called every second
+#       if the voltage has changed since the last call!
 tinkerforge call voltage-bricklet $uid set-voltage-callback-period 1000
 
-# handle incoming voltage callbacks (unit is mV)
-tinkerforge dispatch voltage-bricklet $uid voltage
+echo "Press key to exit"; read dummy
+
+kill -- -$$ # Stop callback dispatch in background
