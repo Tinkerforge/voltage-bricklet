@@ -5,7 +5,7 @@ use Tinkerforge::BrickletVoltage;
 
 use constant HOST => 'localhost';
 use constant PORT => 4223;
-use constant UID => 'XYZ'; # Change to your UID
+use constant UID => 'XYZ'; # Change XYZ to the UID of your Voltage Bricklet
 
 # Callback subroutine for voltage reached callback (parameter has unit mV)
 sub cb_voltage_reached
