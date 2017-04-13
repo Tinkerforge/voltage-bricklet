@@ -25,7 +25,7 @@ class Example
 		v.SetDebouncePeriod(10000);
 
 		// Register voltage reached callback to function VoltageReachedCB
-		v.VoltageReached += VoltageReachedCB;
+		v.VoltageReachedCallback += VoltageReachedCB;
 
 		// Configure threshold for voltage "greater than 5 V" (unit is mV)
 		v.SetVoltageCallbackThreshold('>', 5*1000, 0);
