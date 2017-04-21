@@ -10,7 +10,7 @@ tinkerforge call voltage-bricklet $uid set-debounce-period 10000
 tinkerforge dispatch voltage-bricklet $uid voltage-reached &
 
 # Configure threshold for voltage "greater than 5 V" (unit is mV)
-tinkerforge call voltage-bricklet $uid set-voltage-callback-threshold greater 5000 0
+tinkerforge call voltage-bricklet $uid set-voltage-callback-threshold threshold-option-greater 5000 0
 
 echo "Press key to exit"; read dummy
 
