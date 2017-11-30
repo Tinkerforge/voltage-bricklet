@@ -22,7 +22,7 @@ Module ExampleThreshold
         v.SetDebouncePeriod(10000)
 
         ' Register voltage reached callback to subroutine VoltageReachedCB
-        AddHandler v.VoltageReached, AddressOf VoltageReachedCB
+        AddHandler v.VoltageReachedCallback, AddressOf VoltageReachedCB
 
         ' Configure threshold for voltage "greater than 5 V" (unit is mV)
         v.SetVoltageCallbackThreshold(">"C, 5*1000, 0)
