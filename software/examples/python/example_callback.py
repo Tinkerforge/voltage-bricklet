@@ -8,7 +8,7 @@ UID = "XYZ" # Change XYZ to the UID of your Voltage Bricklet
 from tinkerforge.ip_connection import IPConnection
 from tinkerforge.bricklet_voltage import BrickletVoltage
 
-# Callback function for voltage callback (parameter has unit mV)
+# Callback function for voltage callback
 def cb_voltage(voltage):
     print("Voltage: " + str(voltage/1000.0) + " V")
 

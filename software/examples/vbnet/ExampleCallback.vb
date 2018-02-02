@@ -6,7 +6,7 @@ Module ExampleCallback
     Const PORT As Integer = 4223
     Const UID As String = "XYZ" ' Change XYZ to the UID of your Voltage Bricklet
 
-    ' Callback subroutine for voltage callback (parameter has unit mV)
+    ' Callback subroutine for voltage callback
     Sub VoltageCB(ByVal sender As BrickletVoltage, ByVal voltage As Integer)
         Console.WriteLine("Voltage: " + (voltage/1000.0).ToString() + " V")
     End Sub

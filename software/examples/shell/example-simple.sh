@@ -3,5 +3,5 @@
 
 uid=XYZ # Change XYZ to the UID of your Voltage Bricklet
 
-# Get current voltage (unit is mV)
+# Get current voltage
 tinkerforge call voltage-bricklet $uid get-voltage

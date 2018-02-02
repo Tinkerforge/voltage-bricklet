@@ -10,7 +10,7 @@ const HOST = 'localhost';
 const PORT = 4223;
 const UID = 'XYZ'; // Change XYZ to the UID of your Voltage Bricklet
 
-// Callback function for voltage callback (parameter has unit mV)
+// Callback function for voltage callback
 function cb_voltage($voltage)
 {
     echo "Voltage: " . $voltage/1000.0 . " V\n";

@@ -13,12 +13,12 @@ ipcon@Connect[host,port]
 (*Get threshold callbacks with a debounce time of 10 seconds (10000ms)*)
 v@SetDebouncePeriod[10000]
 
-(*Callback function for voltage reached callback (parameter has unit mV)*)
+(*Callback function for voltage reached callback*)
 VoltageReachedCB[sender_,voltage_]:=
  Print["Voltage: "<>ToString[N[Quantity[voltage,"V/1000"]]]]
 AddEventHandler[v@VoltageReachedCallback,VoltageReachedCB]
 
-(*Configure threshold for voltage "greater than 5 V" (unit is mV)*)
+(*Configure threshold for voltage "greater than 5 V"*)
 option=Tinkerforge`BrickletVoltage`THRESHOLDUOPTIONUGREATER
 v@SetVoltageCallbackThreshold[option,5*1000,0]
 

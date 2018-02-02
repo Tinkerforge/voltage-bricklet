@@ -16,7 +16,7 @@ v = BrickletVoltage.new UID, ipcon # Create device object
 ipcon.connect HOST, PORT # Connect to brickd
 # Don't use device before ipcon is connected
 
-# Register voltage callback (parameter has unit mV)
+# Register voltage callback
 v.register_callback(BrickletVoltage::CALLBACK_VOLTAGE) do |voltage|
   puts "Voltage: #{voltage/1000.0} V"
 end

@@ -7,7 +7,7 @@ class Example
 	private static int PORT = 4223;
 	private static string UID = "XYZ"; // Change XYZ to the UID of your Voltage Bricklet
 
-	// Callback function for voltage reached callback (parameter has unit mV)
+	// Callback function for voltage reached callback
 	static void VoltageReachedCB(BrickletVoltage sender, int voltage)
 	{
 		Console.WriteLine("Voltage: " + voltage/1000.0 + " V");
@@ -27,7 +27,7 @@ class Example
 		// Register voltage reached callback to function VoltageReachedCB
 		v.VoltageReachedCallback += VoltageReachedCB;
 
-		// Configure threshold for voltage "greater than 5 V" (unit is mV)
+		// Configure threshold for voltage "greater than 5 V"
 		v.SetVoltageCallbackThreshold('>', 5*1000, 0);
 
 		Console.WriteLine("Press enter to exit");
