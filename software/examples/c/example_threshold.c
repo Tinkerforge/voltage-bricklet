@@ -36,7 +36,7 @@ int main(void) {
 	// Register voltage reached callback to function cb_voltage_reached
 	voltage_register_callback(&v,
 	                          VOLTAGE_CALLBACK_VOLTAGE_REACHED,
-	                          (void *)cb_voltage_reached,
+	                          (void (*)(void))cb_voltage_reached,
 	                          NULL);
 
 	// Configure threshold for voltage "greater than 5 V"
